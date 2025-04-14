@@ -1,4 +1,22 @@
 
+import requests
+from tkinter import messagebox
+
+def atualizar_codigo():
+    try:
+        url = "https://raw.githubusercontent.com/guirochaluz/gerador-pdf-cyber/main/GerarPDF.py"
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open("GerarPDF.py", "w", encoding="utf-8") as f:
+                f.write(response.text)
+            messagebox.showinfo("Atualização", "✅ GerarPDF.py atualizado com sucesso! Reinicie o app.")
+        else:
+            messagebox.showerror("Erro", f"⚠️ Erro ao baixar: Código {response.status_code}")
+    except Exception as e:
+        messagebox.showerror("Erro", f"❌ Falha na atualização:\n{e}")
+
+
+
 import os
 import webbrowser
 import requests
